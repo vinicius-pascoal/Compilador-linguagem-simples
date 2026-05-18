@@ -102,8 +102,6 @@ COMMENT: '/' ~[/\r\n]* '/' -> skip;
 
 WS: [ \t\r\n]+ -> skip;
 
-ERRO: .;
-
 fragment LETRA: [a-zA-Z];
 fragment DIGITO: [0-9];
 

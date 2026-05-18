@@ -20,7 +20,7 @@ public class ProjetoIParser extends Parser {
 		READ=9, VAR=10, FALSE=11, TRUE=12, WRITE=13, IF=14, THEN=15, ELSE=16, 
 		OR=17, AND=18, OPREL=19, OPAD=20, OPMULT=21, OPNEG=22, ATRIB=23, PVIG=24, 
 		PONTO=25, DPONTOS=26, VIG=27, ABPAR=28, FPAR=29, CTE=30, CADEIA=31, ID=32, 
-		COMMENT=33, WS=34, ERRO=35;
+		COMMENT=33, WS=34;
 	public static final int
 		RULE_prog = 0, RULE_decls = 1, RULE_listDecl = 2, RULE_declTip = 3, RULE_listId = 4, 
 		RULE_tip = 5, RULE_cmdComp = 6, RULE_listCmd = 7, RULE_cmd = 8, RULE_matchedCmd = 9, 
@@ -52,7 +52,7 @@ public class ProjetoIParser extends Parser {
 			"DO", "READ", "VAR", "FALSE", "TRUE", "WRITE", "IF", "THEN", "ELSE", 
 			"OR", "AND", "OPREL", "OPAD", "OPMULT", "OPNEG", "ATRIB", "PVIG", "PONTO", 
 			"DPONTOS", "VIG", "ABPAR", "FPAR", "CTE", "CADEIA", "ID", "COMMENT", 
-			"WS", "ERRO"
+			"WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1469,7 +1469,7 @@ public class ProjetoIParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001#\u00e0\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\"\u00e0\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+

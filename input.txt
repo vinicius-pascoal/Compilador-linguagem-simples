@@ -1,13 +1,40 @@
-PROGRAM teste;
-VAR
-    x, y : INTEGER;
-    ativo : BOOLEAN;
-BEGIN
-    /teste comentario/
-    READ(x);
-    y := x + 10 * 2;
-    IF y > 10 THEN
-        WRITE(y)
-    ELSE
-        WRITE("menor ou igual")
-END.
+pRoGrAm testeCompilador;
+
+vAr
+    contador, limite, total : iNtEgEr;
+    ativo, valido : bOoLeAn;
+    mensagem : sTrInG;
+
+BeGiN
+    / teste comentario/
+
+    read(contador, limite);
+
+    contador := 0;
+    limite := 10;
+    total := -10 + contador * 2 / 1;
+    ativo := true;
+
+    valido := ~(contador > limite) AND ativo OR false;
+
+    write("Inicio do teste", contador, limite, total, ativo, valido);
+
+    while contador < limite do
+        begin
+            contador := contador + 1;
+            total := total + contador;
+
+            if contador >= 5 then
+                write("contador maior ou igual a cinco", contador)
+            else
+                write("contador menor que cinco", contador)
+        end;
+
+    if total <> 0 then
+        begin
+            write("total diferente de zero", total);
+            write("teste finalizado")
+        end
+    else
+        write("total igual a zero")
+eNd.
