@@ -92,7 +92,7 @@ OPDI: '/';
 
 OPNEG: '~';
 
-ATRIB: ':=';
+ATRIB: '=';
 PVIG: ';';
 PONTO: '.';
 DPONTOS: ':';

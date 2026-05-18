@@ -42,7 +42,7 @@ public class ProjetoIParser extends Parser {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, "'+'", "'-'", "'*'", 
-			"'/'", "'~'", "':='", "';'", "'.'", "':'", "','", "'('", "')'"
+			"'/'", "'~'", "'='", "';'", "'.'", "':'", "','", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();

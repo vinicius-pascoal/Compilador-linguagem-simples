@@ -11,19 +11,19 @@ BeGiN
 
     read(contador, limite);
 
-    contador := 0;
-    limite := 10;
-    total := -10 + contador * 2 / 1;
-    ativo := true;
+    contador = 0;
+    limite = 10;
+    total = -10 + contador * 2 / 1;
+    ativo = true;
 
-    valido := ~(contador > limite) AND ativo OR false;
+    valido = ~(contador > limite) AND ativo OR false;
 
     write("Inicio do teste", contador, limite, total, ativo, valido);
 
     while contador < limite do
         begin
-            contador := contador + 1;
-            total := total + contador;
+            contador = contador + 1;
+            total = total + contador;
 
             if contador >= 5 then
                 write("contador maior ou igual a cinco", contador)
