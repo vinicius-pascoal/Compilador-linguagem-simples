@@ -1,0 +1,12 @@
+PROGRAM teste;
+VAR
+    x, y : INTEGER;
+    ativo : BOOLEAN;
+BEGIN
+    READ(x);
+    y := x + 10 * 2;
+    IF y > 10 THEN
+        WRITE(y)
+    ELSE
+        WRITE("menor ou igual")
+END.
