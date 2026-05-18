@@ -1,7 +1,8 @@
 pRoGrAm testeCompilador;
 
 vAr
-    contador, limite, total : iNtEgEr;
+    contador, limite : iNtEgEr;
+    total : integer;
     ativo, valido : bOoLeAn;
     mensagem : sTrInG;
 
