@@ -14,7 +14,7 @@ tip: INTEGER | BOOLEAN | STRING;
 
 cmdComp: BEGIN listCmd? END;
 
-listCmd: cmd (PVIG cmd)* PVIG?;
+listCmd: cmd (PVIG cmd)*;
 
 cmd: matchedCmd | unmatchedCmd;
 
@@ -52,11 +52,9 @@ exprAdd: exprMult (OPAD exprMult)*;
 
 exprMult: exprUnary (OPMULT exprUnary)*;
 
-exprUnary: OPNEG exprUnary | exprPrimary;
+exprUnary: OPNEG exprUnary | OPAD exprUnary | exprPrimary;
 
-exprPrimary: ID | signedCte | TRUE | FALSE | ABPAR expr FPAR;
-
-signedCte: OPAD? CTE;
+exprPrimary: ID | CTE | TRUE | FALSE | ABPAR expr FPAR;
 
 PROGRAM: P R O G R A M;
 INTEGER: I N T E G E R;
@@ -74,6 +72,7 @@ WRITE: W R I T E;
 IF: I F;
 THEN: T H E N;
 ELSE: E L S E;
+
 OR: O R;
 AND: A N D;
 
@@ -102,6 +101,8 @@ ID: LETRA (LETRA | DIGITO)*;
 COMMENT: '/' ~[/\r\n]* '/' -> skip;
 
 WS: [ \t\r\n]+ -> skip;
+
+ERRO: .;
 
 fragment LETRA: [a-zA-Z];
 fragment DIGITO: [0-9];
