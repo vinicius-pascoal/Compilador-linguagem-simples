@@ -48,11 +48,15 @@ exprAnd: exprRel (AND exprRel)*;
 
 exprRel: exprAdd (OPREL exprAdd)?;
 
-exprAdd: exprMult (OPAD exprMult)*;
+exprAdd: exprMult (OPAD exprMult | OPSU exprMult)*;
 
-exprMult: exprUnary (OPMULT exprUnary)*;
+exprMult: exprUnary (OPMULT exprUnary | OPDI exprUnary)*;
 
-exprUnary: OPNEG exprUnary | OPAD exprUnary | exprPrimary;
+exprUnary:
+	OPNEG exprUnary
+	| OPAD exprUnary
+	| OPSU exprUnary
+	| exprPrimary;
 
 exprPrimary: ID | CTE | TRUE | FALSE | ABPAR expr FPAR;
 
@@ -78,9 +82,13 @@ AND: A N D;
 
 OPREL: '<=' | '>=' | '==' | '<>' | '<' | '>';
 
-OPAD: '+' | '-';
+OPAD: '+';
 
-OPMULT: '*' | '/';
+OPSU: '-';
+
+OPMULT: '*';
+
+OPDI: '/';
 
 OPNEG: '~';
 
