@@ -48,9 +48,11 @@ exprAnd: exprRel (AND exprRel)*;
 
 exprRel: exprAdd (OPREL exprAdd)?;
 
-exprAdd: exprMult (OPAD exprMult | OPSU exprMult)*;
+exprAdd:
+	exprMult (OPAD exprMult | OPSU exprMult)*; //nao esquece de separar
 
-exprMult: exprUnary (OPMULT exprUnary | OPDI exprUnary)*;
+exprMult:
+	exprUnary (OPMULT exprUnary | OPDI exprUnary)*; //nao esquece de separar
 
 exprUnary:
 	OPNEG exprUnary
