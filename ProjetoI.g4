@@ -60,11 +60,7 @@ exprMul: exprDiv (OPMULT exprDiv)*;
 
 exprDiv: exprUnary (OPDI exprUnary)*;
 
-exprUnary:
-	OPNEG exprUnary
-	| OPAD exprUnary
-	| OPSUB exprUnary
-	| exprPrimary;
+exprUnary: (OPNEG | OPAD | OPSUB) exprUnary | exprPrimary;
 
 exprPrimary: ID | CTE | TRUE | FALSE | ABPAR expr FPAR;
 
