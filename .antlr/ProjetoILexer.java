@@ -1,4 +1,4 @@
-// Generated from c:/Users/poluc/Documents/GitHub/Compilador-linguagem-simples/ProjetoI.g4 by ANTLR 4.13.1
+// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/ProjetoI.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -18,7 +18,7 @@ public class ProjetoILexer extends Lexer {
 	public static final int
 		PROGRAM=1, INTEGER=2, BOOLEAN=3, STRING=4, BEGIN=5, END=6, WHILE=7, DO=8, 
 		READ=9, VAR=10, FALSE=11, TRUE=12, WRITE=13, IF=14, THEN=15, ELSE=16, 
-		OR=17, AND=18, OPREL=19, OPAD=20, OPSU=21, OPMULT=22, OPDI=23, OPNEG=24, 
+		OR=17, AND=18, OPREL=19, OPAD=20, OPSUB=21, OPMULT=22, OPDI=23, OPNEG=24, 
 		ATRIB=25, PVIG=26, PONTO=27, DPONTOS=28, VIG=29, ABPAR=30, FPAR=31, CTE=32, 
 		CADEIA=33, ID=34, COMMENT=35, WS=36;
 	public static String[] channelNames = {
@@ -33,10 +33,10 @@ public class ProjetoILexer extends Lexer {
 		return new String[] {
 			"PROGRAM", "INTEGER", "BOOLEAN", "STRING", "BEGIN", "END", "WHILE", "DO", 
 			"READ", "VAR", "FALSE", "TRUE", "WRITE", "IF", "THEN", "ELSE", "OR", 
-			"AND", "OPREL", "OPAD", "OPSU", "OPMULT", "OPDI", "OPNEG", "ATRIB", "PVIG", 
-			"PONTO", "DPONTOS", "VIG", "ABPAR", "FPAR", "CTE", "CADEIA", "ID", "COMMENT", 
-			"WS", "LETRA", "DIGITO", "A", "B", "D", "E", "F", "G", "H", "I", "L", 
-			"M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "Y"
+			"AND", "OPREL", "OPAD", "OPSUB", "OPMULT", "OPDI", "OPNEG", "ATRIB", 
+			"PVIG", "PONTO", "DPONTOS", "VIG", "ABPAR", "FPAR", "CTE", "CADEIA", 
+			"ID", "COMMENT", "WS", "LETRA", "DIGITO", "A", "B", "D", "E", "F", "G", 
+			"H", "I", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "Y"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -53,7 +53,7 @@ public class ProjetoILexer extends Lexer {
 		return new String[] {
 			null, "PROGRAM", "INTEGER", "BOOLEAN", "STRING", "BEGIN", "END", "WHILE", 
 			"DO", "READ", "VAR", "FALSE", "TRUE", "WRITE", "IF", "THEN", "ELSE", 
-			"OR", "AND", "OPREL", "OPAD", "OPSU", "OPMULT", "OPDI", "OPNEG", "ATRIB", 
+			"OR", "AND", "OPREL", "OPAD", "OPSUB", "OPMULT", "OPDI", "OPNEG", "ATRIB", 
 			"PVIG", "PONTO", "DPONTOS", "VIG", "ABPAR", "FPAR", "CTE", "CADEIA", 
 			"ID", "COMMENT", "WS"
 		};
