@@ -21,7 +21,7 @@ BeGiN
     write("Inicio do teste", contador, limite, total, ativo, valido);
 
     while contador < limite do
-        begin
+        {
             contador = contador + 1;
             total = total + contador;
 
@@ -29,13 +29,13 @@ BeGiN
                 write("contador maior ou igual a cinco", contador)
             else
                 write("contador menor que cinco", contador)
-        end;
+        };
 
     if total <> 0 then
-        begin
+        {
             write("total diferente de zero", total);
             write("teste finalizado")
-        end
+        }
     else
         write("total igual a zero")
 eNd.

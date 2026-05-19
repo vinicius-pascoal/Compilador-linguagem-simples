@@ -14,6 +14,8 @@ tip: INTEGER | BOOLEAN | STRING;
 
 cmdComp: BEGIN listCmd? END;
 
+cmdBase: '{' listCmd? '}';
+
 listCmd: cmd (PVIG cmd)*;
 
 cmd: matchedCmd;
@@ -22,12 +24,15 @@ loops:
 	WHILE expr DO matchedCmd
 	| FOR ID ATRIB expr TO expr DO matchedCmd;
 
-matchedCmd:
-	otherCmd
-	| IF expr THEN matchedCmd ELSE matchedCmd
-	| loops;
+cmdsimple: IF expr THEN matchedCmd ELSE matchedCmd | loops;
 
-otherCmd: cmdRead | cmdWrite | cmdAtrib | cmdComp;
+matchedCmd: otherCmd | cmdsimple;
+
+otherCmd: cmdBase | cmdBextra;
+
+cmdBextra: cmdBadd | cmdRead;
+
+cmdBadd: cmdWrite | cmdAtrib;
 
 cmdRead: READ ABPAR listId FPAR;
 
