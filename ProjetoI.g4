@@ -16,17 +16,16 @@ cmdComp: BEGIN listCmd? END;
 
 listCmd: cmd (PVIG cmd)*;
 
-cmd: matchedCmd | unmatchedCmd;
+cmd: matchedCmd;
+
+loops:
+	WHILE expr DO matchedCmd
+	| FOR ID ATRIB expr TO expr DO matchedCmd;
 
 matchedCmd:
 	otherCmd
 	| IF expr THEN matchedCmd ELSE matchedCmd
-	| WHILE expr DO matchedCmd;
-
-unmatchedCmd:
-	IF expr THEN cmd
-	| IF expr THEN matchedCmd ELSE unmatchedCmd
-	| WHILE expr DO unmatchedCmd;
+	| loops;
 
 otherCmd: cmdRead | cmdWrite | cmdAtrib | cmdComp;
 
@@ -71,6 +70,8 @@ STRING: S T R I N G;
 BEGIN: B E G I N;
 END: E N D;
 WHILE: W H I L E;
+FOR: F O R;
+TO: T O;
 DO: D O;
 READ: R E A D;
 VAR: V A R;
