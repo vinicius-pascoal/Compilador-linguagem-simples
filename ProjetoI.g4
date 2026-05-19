@@ -46,7 +46,7 @@ exprOr: exprAnd (OR exprAnd)*;
 
 exprAnd: exprRel (AND exprRel)*;
 
-exprRel: exprAdd (OPREL exprAdd)?;
+exprRel: exprAdd ((OPREL | OPMOE | OPDIF | OPEQ) exprAdd)?;
 
 exprAdd: exprSub (OPAD exprSub)*;
 
@@ -84,7 +84,13 @@ ELSE: E L S E;
 OR: O R;
 AND: A N D;
 
-OPREL: '<=' | '>=' | '==' | '<>' | '<' | '>';
+OPREL: '<=' | '>=';
+
+OPMOE: '<' | '>';
+
+OPDIF: '<>';
+
+OPEQ: '==';
 
 OPAD: '+';
 
