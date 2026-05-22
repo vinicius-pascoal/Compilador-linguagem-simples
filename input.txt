@@ -7,7 +7,7 @@ vAr
     mensagem : sTrInG;
 
 BeGiN
-    / teste comentario/
+    /* teste comentario */
 
     read(contador, limite);
 

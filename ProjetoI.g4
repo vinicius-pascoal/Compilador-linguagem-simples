@@ -14,17 +14,26 @@ tip: INTEGER | BOOLEAN | STRING;
 
 cmdComp: BEGIN listCmd? END;
 
-cmdBase: '{' listCmd? '}';
+cmdBase: ABCHAVE listCmd? FCHAVE;
 
 listCmd: cmd (PVIG cmd)*;
 
-cmd: matchedCmd;
+cmd: matchedCmd | unmatchedCmd;
 
 loops:
 	WHILE expr DO matchedCmd
 	| FOR ID ATRIB expr TO expr DO matchedCmd;
 
+loopsUnmatched:
+	WHILE expr DO unmatchedCmd
+	| FOR ID ATRIB expr TO expr DO unmatchedCmd;
+
 cmdsimple: IF expr THEN matchedCmd ELSE matchedCmd | loops;
+
+unmatchedCmd:
+	IF expr THEN cmd
+	| IF expr THEN matchedCmd ELSE unmatchedCmd
+	| loopsUnmatched;
 
 matchedCmd: otherCmd | cmdsimple;
 
@@ -111,6 +120,8 @@ DPONTOS: ':';
 VIG: ',';
 ABPAR: '(';
 FPAR: ')';
+ABCHAVE: '{';
+FCHAVE: '}';
 
 CTE: DIGITO+;
 
@@ -118,9 +129,11 @@ CADEIA: '"' (~["\r\n])* '"';
 
 ID: LETRA (LETRA | DIGITO)*;
 
-COMMENT: '/' ~[/\r\n]* '/' -> skip;
+COMMENT: '/*' .*? '*/' -> skip;
 
 WS: [ \t\r\n]+ -> skip;
+
+ERRO: .;
 
 fragment LETRA: [a-zA-Z];
 fragment DIGITO: [0-9];
