@@ -12,7 +12,7 @@ BeGiN
     read(contador, limite);
 
     contador = 0;
-    limite = 10;
+    limite = 1000000;
     total = -10 + contador * 2 / 1;
     ativo = true;
 

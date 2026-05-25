@@ -20,8 +20,8 @@ public class ProjetoIParser extends Parser {
 		TO=9, DO=10, READ=11, VAR=12, FALSE=13, TRUE=14, WRITE=15, IF=16, THEN=17, 
 		ELSE=18, OR=19, AND=20, OPREL=21, OPMOE=22, OPDIF=23, OPEQ=24, OPAD=25, 
 		OPSUB=26, OPMULT=27, OPDI=28, OPNEG=29, ATRIB=30, PVIG=31, PONTO=32, DPONTOS=33, 
-		VIG=34, ABPAR=35, FPAR=36, ABCHAVE=37, FCHAVE=38, CTE=39, CADEIA=40, ID=41, 
-		COMMENT=42, WS=43, ERRO=44;
+		VIG=34, ABPAR=35, FPAR=36, ABCHAVE=37, FCHAVE=38, CTE=39, ERRO_CTE_2_BYTES=40, 
+		CADEIA=41, ID=42, COMMENT=43, WS=44, ERRO=45;
 	public static final int
 		RULE_prog = 0, RULE_decls = 1, RULE_listDecl = 2, RULE_declTip = 3, RULE_listId = 4, 
 		RULE_tip = 5, RULE_cmdComp = 6, RULE_cmdBase = 7, RULE_listCmd = 8, RULE_cmd = 9, 
@@ -57,8 +57,8 @@ public class ProjetoIParser extends Parser {
 			"FOR", "TO", "DO", "READ", "VAR", "FALSE", "TRUE", "WRITE", "IF", "THEN", 
 			"ELSE", "OR", "AND", "OPREL", "OPMOE", "OPDIF", "OPEQ", "OPAD", "OPSUB", 
 			"OPMULT", "OPDI", "OPNEG", "ATRIB", "PVIG", "PONTO", "DPONTOS", "VIG", 
-			"ABPAR", "FPAR", "ABCHAVE", "FCHAVE", "CTE", "CADEIA", "ID", "COMMENT", 
-			"WS", "ERRO"
+			"ABPAR", "FPAR", "ABCHAVE", "FCHAVE", "CTE", "ERRO_CTE_2_BYTES", "CADEIA", 
+			"ID", "COMMENT", "WS", "ERRO"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -423,7 +423,7 @@ public class ProjetoIParser extends Parser {
 			setState(101);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 2336462309760L) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 4535485565312L) != 0)) {
 				{
 				setState(100);
 				listCmd();
@@ -470,7 +470,7 @@ public class ProjetoIParser extends Parser {
 			setState(107);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 2336462309760L) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 4535485565312L) != 0)) {
 				{
 				setState(106);
 				listCmd();
@@ -1923,7 +1923,7 @@ public class ProjetoIParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001,\u0125\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001-\u0125\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1984,7 +1984,7 @@ public class ProjetoIParser extends Parser {
 		"\u0000\u0000\u00004\u00f0\u0001\u0000\u0000\u00006\u00f5\u0001\u0000\u0000"+
 		"\u00008\u00fd\u0001\u0000\u0000\u0000:\u0105\u0001\u0000\u0000\u0000<"+
 		"\u010d\u0001\u0000\u0000\u0000>\u0118\u0001\u0000\u0000\u0000@\u0122\u0001"+
-		"\u0000\u0000\u0000BC\u0005\u0001\u0000\u0000CD\u0005)\u0000\u0000DE\u0005"+
+		"\u0000\u0000\u0000BC\u0005\u0001\u0000\u0000CD\u0005*\u0000\u0000DE\u0005"+
 		"\u001f\u0000\u0000EF\u0003\u0002\u0001\u0000FG\u0003\f\u0006\u0000GH\u0005"+
 		" \u0000\u0000HI\u0005\u0000\u0000\u0001I\u0001\u0001\u0000\u0000\u0000"+
 		"JK\u0005\f\u0000\u0000KN\u0003\u0004\u0002\u0000LN\u0001\u0000\u0000\u0000"+
@@ -1993,7 +1993,7 @@ public class ProjetoIParser extends Parser {
 		"\u0000\u0000\u0000RP\u0001\u0000\u0000\u0000RS\u0001\u0000\u0000\u0000"+
 		"S\u0005\u0001\u0000\u0000\u0000TU\u0003\b\u0004\u0000UV\u0005!\u0000\u0000"+
 		"VW\u0003\n\u0005\u0000WX\u0005\u001f\u0000\u0000X\u0007\u0001\u0000\u0000"+
-		"\u0000Y^\u0005)\u0000\u0000Z[\u0005\"\u0000\u0000[]\u0005)\u0000\u0000"+
+		"\u0000Y^\u0005*\u0000\u0000Z[\u0005\"\u0000\u0000[]\u0005*\u0000\u0000"+
 		"\\Z\u0001\u0000\u0000\u0000]`\u0001\u0000\u0000\u0000^\\\u0001\u0000\u0000"+
 		"\u0000^_\u0001\u0000\u0000\u0000_\t\u0001\u0000\u0000\u0000`^\u0001\u0000"+
 		"\u0000\u0000ab\u0007\u0000\u0000\u0000b\u000b\u0001\u0000\u0000\u0000"+
@@ -2009,7 +2009,7 @@ public class ProjetoIParser extends Parser {
 		"\u0000\u0000yx\u0001\u0000\u0000\u0000z\u0013\u0001\u0000\u0000\u0000"+
 		"{|\u0005\u0007\u0000\u0000|}\u0003.\u0017\u0000}~\u0005\n\u0000\u0000"+
 		"~\u007f\u0003\u001c\u000e\u0000\u007f\u008a\u0001\u0000\u0000\u0000\u0080"+
-		"\u0081\u0005\b\u0000\u0000\u0081\u0082\u0005)\u0000\u0000\u0082\u0083"+
+		"\u0081\u0005\b\u0000\u0000\u0081\u0082\u0005*\u0000\u0000\u0082\u0083"+
 		"\u0005\u001e\u0000\u0000\u0083\u0084\u0003.\u0017\u0000\u0084\u0085\u0005"+
 		"\t\u0000\u0000\u0085\u0086\u0003.\u0017\u0000\u0086\u0087\u0005\n\u0000"+
 		"\u0000\u0087\u0088\u0003\u001c\u000e\u0000\u0088\u008a\u0001\u0000\u0000"+
@@ -2017,7 +2017,7 @@ public class ProjetoIParser extends Parser {
 		"\u008a\u0015\u0001\u0000\u0000\u0000\u008b\u008c\u0005\u0007\u0000\u0000"+
 		"\u008c\u008d\u0003.\u0017\u0000\u008d\u008e\u0005\n\u0000\u0000\u008e"+
 		"\u008f\u0003\u001a\r\u0000\u008f\u009a\u0001\u0000\u0000\u0000\u0090\u0091"+
-		"\u0005\b\u0000\u0000\u0091\u0092\u0005)\u0000\u0000\u0092\u0093\u0005"+
+		"\u0005\b\u0000\u0000\u0091\u0092\u0005*\u0000\u0000\u0092\u0093\u0005"+
 		"\u001e\u0000\u0000\u0093\u0094\u0003.\u0017\u0000\u0094\u0095\u0005\t"+
 		"\u0000\u0000\u0095\u0096\u0003.\u0017\u0000\u0096\u0097\u0005\n\u0000"+
 		"\u0000\u0097\u0098\u0003\u001a\r\u0000\u0098\u009a\u0001\u0000\u0000\u0000"+
@@ -2054,9 +2054,9 @@ public class ProjetoIParser extends Parser {
 		"\u0003*\u0015\u0000\u00d1\u00cf\u0001\u0000\u0000\u0000\u00d2\u00d5\u0001"+
 		"\u0000\u0000\u0000\u00d3\u00d1\u0001\u0000\u0000\u0000\u00d3\u00d4\u0001"+
 		"\u0000\u0000\u0000\u00d4)\u0001\u0000\u0000\u0000\u00d5\u00d3\u0001\u0000"+
-		"\u0000\u0000\u00d6\u00d9\u0003.\u0017\u0000\u00d7\u00d9\u0005(\u0000\u0000"+
+		"\u0000\u0000\u00d6\u00d9\u0003.\u0017\u0000\u00d7\u00d9\u0005)\u0000\u0000"+
 		"\u00d8\u00d6\u0001\u0000\u0000\u0000\u00d8\u00d7\u0001\u0000\u0000\u0000"+
-		"\u00d9+\u0001\u0000\u0000\u0000\u00da\u00db\u0005)\u0000\u0000\u00db\u00dc"+
+		"\u00d9+\u0001\u0000\u0000\u0000\u00da\u00db\u0005*\u0000\u0000\u00db\u00dc"+
 		"\u0005\u001e\u0000\u0000\u00dc\u00dd\u0003.\u0017\u0000\u00dd-\u0001\u0000"+
 		"\u0000\u0000\u00de\u00df\u00030\u0018\u0000\u00df/\u0001\u0000\u0000\u0000"+
 		"\u00e0\u00e5\u00032\u0019\u0000\u00e1\u00e2\u0005\u0013\u0000\u0000\u00e2"+
@@ -2090,7 +2090,7 @@ public class ProjetoIParser extends Parser {
 		"\u0000\u0000\u0000\u0115\u0116\u0007\u0002\u0000\u0000\u0116\u0119\u0003"+
 		">\u001f\u0000\u0117\u0119\u0003@ \u0000\u0118\u0115\u0001\u0000\u0000"+
 		"\u0000\u0118\u0117\u0001\u0000\u0000\u0000\u0119?\u0001\u0000\u0000\u0000"+
-		"\u011a\u0123\u0005)\u0000\u0000\u011b\u0123\u0005\'\u0000\u0000\u011c"+
+		"\u011a\u0123\u0005*\u0000\u0000\u011b\u0123\u0005\'\u0000\u0000\u011c"+
 		"\u0123\u0005\u000e\u0000\u0000\u011d\u0123\u0005\r\u0000\u0000\u011e\u011f"+
 		"\u0005#\u0000\u0000\u011f\u0120\u0003.\u0017\u0000\u0120\u0121\u0005$"+
 		"\u0000\u0000\u0121\u0123\u0001\u0000\u0000\u0000\u0122\u011a\u0001\u0000"+

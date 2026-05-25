@@ -123,7 +123,9 @@ FPAR: ')';
 ABCHAVE: '{';
 FCHAVE: '}';
 
-CTE: DIGITO+;
+CTE: '0'+ | '0'* NUM_1_32767;
+
+ERRO_CTE_2_BYTES: DIGITO+;
 
 CADEIA: '"' (~["\r\n])* '"';
 
@@ -134,6 +136,17 @@ COMMENT: '/*' .*? '*/' -> skip;
 WS: [ \t\r\n]+ -> skip;
 
 ERRO: .;
+
+fragment NUM_1_32767:
+	[1-9]
+	| [1-9] DIGITO
+	| [1-9] DIGITO DIGITO
+	| [1-9] DIGITO DIGITO DIGITO
+	| [1-2] DIGITO DIGITO DIGITO DIGITO
+	| '3' [0-1] DIGITO DIGITO DIGITO
+	| '32' [0-6] DIGITO DIGITO
+	| '327' [0-5] DIGITO
+	| '3276' [0-7];
 
 fragment LETRA: [a-zA-Z];
 fragment DIGITO: [0-9];
