@@ -1,41 +1,63 @@
-pRoGrAm testeCompilador;
+PROGRAM testeCompilador;
 
-vAr
-    contador, limite : iNtEgEr;
-    total : integer;
-    ativo, valido : bOoLeAn;
-    mensagem : sTrInG;
+VAR
+    contador, limite, total, indice, ajuste : INTEGER;
+    ativo, valido, menor, maior, iguais, diferentes, dentroFaixa : BOOLEAN;
+    mensagem : STRING;
 
-BeGiN
-    /* teste comentario */
+BEGIN
+    /* Inicio do programa */
 
-    read(contador, limite);
+    READ(contador, limite);
 
     contador = 0;
-    limite = 1000000;
+    limite = 10;
+    indice = 1;
+    ajuste = +5;
     total = -10 + contador * 2 / 1;
-    ativo = true;
 
-    valido = ~(contador > limite) AND ativo OR false;
+    ativo = TRUE;
+    valido = FALSE;
 
-    write("Inicio do teste", contador, limite, total, ativo, valido);
+    menor = contador < limite;
+    maior = limite > contador;
+    iguais = contador == limite;
+    diferentes = contador <> limite;
+    dentroFaixa = contador <= limite AND limite >= contador;
 
-    while contador < limite do
-        {
-            contador = contador + 1;
-            total = total + contador;
+    valido = ~(contador == limite) AND ativo OR FALSE;
 
-            if contador >= 5 then
-                write("contador maior ou igual a cinco", contador)
-            else
-                write("contador menor que cinco", contador)
-        };
+    WRITE("Inicio do teste", contador, limite, total, ativo, valido);
 
-    if total <> 0 then
-        {
-            write("total diferente de zero", total);
-            write("teste finalizado")
+    IF (contador < limite) {
+        WRITE("contador menor que limite", contador)
+    }
+    ELSE {
+        WRITE("contador maior ou igual ao limite", contador)
+    };
+
+    WHILE (contador < limite) {
+        contador = contador + 1;
+        total = total + contador;
+
+        IF (contador >= 5) {
+            WRITE("contador maior ou igual a cinco", contador)
         }
-    else
-        write("total igual a zero")
-eNd.
+        ELSE {
+            WRITE("contador menor que cinco", contador)
+        }
+    };
+
+    FOR (indice = 1 TO 3) {
+        total = total + indice;
+        WRITE("indice do for", indice, total)
+    };
+
+    IF (total <> 0) {
+        WRITE("total diferente de zero", total);
+        WRITE("teste finalizado com sucesso")
+    }
+    ELSE {
+        WRITE("total igual a zero")
+    }
+END.

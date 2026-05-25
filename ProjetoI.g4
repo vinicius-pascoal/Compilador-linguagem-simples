@@ -16,32 +16,19 @@ cmdComp: BEGIN listCmd? END;
 
 cmdBase: ABCHAVE listCmd? FCHAVE;
 
-listCmd: cmd (PVIG cmd)*;
+listCmd: cmd (PVIG cmd)* PVIG?;
 
-cmd: matchedCmd | unmatchedCmd;
+cmd: cmdIf | cmdWhile | cmdFor | otherCmd;
 
-loops:
-	WHILE expr DO matchedCmd
-	| FOR ID ATRIB expr TO expr DO matchedCmd;
+cmdIf:
+	IF ABPAR expr FPAR cmdBase
+	| IF ABPAR expr FPAR cmdBase ELSE cmdBase;
 
-loopsUnmatched:
-	WHILE expr DO unmatchedCmd
-	| FOR ID ATRIB expr TO expr DO unmatchedCmd;
+cmdWhile: WHILE ABPAR expr FPAR cmdBase;
 
-cmdsimple: IF expr THEN matchedCmd ELSE matchedCmd | loops;
+cmdFor: FOR ABPAR ID ATRIB expr TO expr FPAR cmdBase;
 
-unmatchedCmd:
-	IF expr THEN cmd
-	| IF expr THEN matchedCmd ELSE unmatchedCmd
-	| loopsUnmatched;
-
-matchedCmd: otherCmd | cmdsimple;
-
-otherCmd: cmdBase | cmdBextra;
-
-cmdBextra: cmdBadd | cmdRead;
-
-cmdBadd: cmdWrite | cmdAtrib;
+otherCmd: cmdBase | cmdRead | cmdWrite | cmdAtrib;
 
 cmdRead: READ ABPAR listId FPAR;
 
