@@ -1,4 +1,4 @@
-// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/ProjetoI.g4 by ANTLR 4.13.1
+// Generated from c:/Users/poluc/Documents/GitHub/Compilador-linguagem-simples/grammar/ProjetoI.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;

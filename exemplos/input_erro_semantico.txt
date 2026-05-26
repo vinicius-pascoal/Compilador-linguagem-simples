@@ -1,0 +1,9 @@
+PROGRAM erroSemantico;
+
+VAR
+    x : INTEGER;
+    ativo : BOOLEAN;
+
+BEGIN
+    x = TRUE
+END.

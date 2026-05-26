@@ -1,6 +1,0 @@
-PROGRAM teste;
-VAR
-    x : INTEGER;
-BEGIN
-    x = 40000
-END.

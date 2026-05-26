@@ -5,8 +5,8 @@
       "name": "Debug ProjetoI ANTLR4",
       "type": "antlr-debug",
       "request": "launch",
-      "input": "input.txt",
-      "grammar": "ProjetoI.g4",
+      "input": "exemplos/input.txt",
+      "grammar": "grammar/ProjetoI.g4",
       "startRule": "prog",
       "printParseTree": true,
       "visualParseTree": true
