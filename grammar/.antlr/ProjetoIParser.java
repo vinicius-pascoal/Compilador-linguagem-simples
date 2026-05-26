@@ -1,4 +1,4 @@
-// Generated from c:/Users/poluc/Documents/GitHub/Compilador-linguagem-simples/grammar/ProjetoI.g4 by ANTLR 4.13.1
+// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/grammar/ProjetoI.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -127,6 +127,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_prog; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterProg(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitProg(this);
+		}
 	}
 
 	public final ProgContext prog() throws RecognitionException {
@@ -172,6 +180,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_decls; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterDecls(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitDecls(this);
+		}
 	}
 
 	public final DeclsContext decls() throws RecognitionException {
@@ -222,6 +238,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listDecl; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterListDecl(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitListDecl(this);
+		}
 	}
 
 	public final ListDeclContext listDecl() throws RecognitionException {
@@ -272,6 +296,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declTip; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterDeclTip(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitDeclTip(this);
+		}
 	}
 
 	public final DeclTipContext declTip() throws RecognitionException {
@@ -315,6 +347,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listId; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterListId(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitListId(this);
+		}
 	}
 
 	public final ListIdContext listId() throws RecognitionException {
@@ -364,6 +404,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tip; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterTip(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitTip(this);
+		}
 	}
 
 	public final TipContext tip() throws RecognitionException {
@@ -407,6 +455,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdComp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdComp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdComp(this);
+		}
 	}
 
 	public final CmdCompContext cmdComp() throws RecognitionException {
@@ -454,6 +510,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdBase; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdBase(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdBase(this);
+		}
 	}
 
 	public final CmdBaseContext cmdBase() throws RecognitionException {
@@ -506,6 +570,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listCmd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterListCmd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitListCmd(this);
+		}
 	}
 
 	public final ListCmdContext listCmd() throws RecognitionException {
@@ -577,6 +649,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmd(this);
+		}
 	}
 
 	public final CmdContext cmd() throws RecognitionException {
@@ -651,6 +731,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdIf; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdIf(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdIf(this);
+		}
 	}
 
 	public final CmdIfContext cmdIf() throws RecognitionException {
@@ -722,6 +810,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdWhile; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdWhile(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdWhile(this);
+		}
 	}
 
 	public final CmdWhileContext cmdWhile() throws RecognitionException {
@@ -774,6 +870,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdFor; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdFor(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdFor(this);
+		}
 	}
 
 	public final CmdForContext cmdFor() throws RecognitionException {
@@ -831,6 +935,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_otherCmd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterOtherCmd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitOtherCmd(this);
+		}
 	}
 
 	public final OtherCmdContext otherCmd() throws RecognitionException {
@@ -895,6 +1007,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdRead; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdRead(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdRead(this);
+		}
 	}
 
 	public final CmdReadContext cmdRead() throws RecognitionException {
@@ -936,6 +1056,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdWrite; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdWrite(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdWrite(this);
+		}
 	}
 
 	public final CmdWriteContext cmdWrite() throws RecognitionException {
@@ -981,6 +1109,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listW; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterListW(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitListW(this);
+		}
 	}
 
 	public final ListWContext listW() throws RecognitionException {
@@ -1031,6 +1167,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_elemW; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterElemW(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitElemW(this);
+		}
 	}
 
 	public final ElemWContext elemW() throws RecognitionException {
@@ -1087,6 +1231,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmdAtrib; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterCmdAtrib(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitCmdAtrib(this);
+		}
 	}
 
 	public final CmdAtribContext cmdAtrib() throws RecognitionException {
@@ -1123,6 +1275,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExpr(this);
+		}
 	}
 
 	public final ExprContext expr() throws RecognitionException {
@@ -1162,6 +1322,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprOr; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprOr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprOr(this);
+		}
 	}
 
 	public final ExprOrContext exprOr() throws RecognitionException {
@@ -1218,6 +1386,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprAnd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprAnd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprAnd(this);
+		}
 	}
 
 	public final ExprAndContext exprAnd() throws RecognitionException {
@@ -1274,6 +1450,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprRel; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprRel(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprRel(this);
+		}
 	}
 
 	public final ExprRelContext exprRel() throws RecognitionException {
@@ -1334,6 +1518,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprAdd; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprAdd(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprAdd(this);
+		}
 	}
 
 	public final ExprAddContext exprAdd() throws RecognitionException {
@@ -1390,6 +1582,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprSub; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprSub(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprSub(this);
+		}
 	}
 
 	public final ExprSubContext exprSub() throws RecognitionException {
@@ -1446,6 +1646,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprMul; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprMul(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprMul(this);
+		}
 	}
 
 	public final ExprMulContext exprMul() throws RecognitionException {
@@ -1502,6 +1710,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprDiv; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprDiv(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprDiv(this);
+		}
 	}
 
 	public final ExprDivContext exprDiv() throws RecognitionException {
@@ -1557,6 +1773,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprUnary; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprUnary(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprUnary(this);
+		}
 	}
 
 	public final ExprUnaryContext exprUnary() throws RecognitionException {
@@ -1627,6 +1851,14 @@ public class ProjetoIParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_exprPrimary; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).enterExprPrimary(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ProjetoIListener ) ((ProjetoIListener)listener).exitExprPrimary(this);
+		}
 	}
 
 	public final ExprPrimaryContext exprPrimary() throws RecognitionException {

@@ -41,7 +41,6 @@ public class Main {
       System.out.println("Analise lexica: OK");
       System.out.println("Analise sintatica: OK");
       System.out.println("Analise semantica: OK");
-      System.out.println("Gerador de codigo: pendente");
 
     } catch (ErroSemantico e) {
       System.err.println(e.getMessage());
@@ -62,15 +61,15 @@ public class Main {
       if (token.getType() == ProjetoILexer.ERRO_CTE_2_BYTES) {
         throw new FalhaCompilacao(
             "Erro lexico na linha " + token.getLine() +
-            ", coluna " + (token.getCharPositionInLine() + 1) +
-            ": constante inteira ultrapassa 2 bytes: " + token.getText());
+                ", coluna " + (token.getCharPositionInLine() + 1) +
+                ": constante inteira ultrapassa 2 bytes: " + token.getText());
       }
 
       if (token.getType() == ProjetoILexer.ERRO) {
         throw new FalhaCompilacao(
             "Erro lexico na linha " + token.getLine() +
-            ", coluna " + (token.getCharPositionInLine() + 1) +
-            ": caractere invalido: " + token.getText());
+                ", coluna " + (token.getCharPositionInLine() + 1) +
+                ": caractere invalido: " + token.getText());
       }
     }
   }
@@ -87,8 +86,8 @@ public class Main {
 
       throw new FalhaCompilacao(
           "Erro lexico na linha " + line +
-          ", coluna " + (charPositionInLine + 1) +
-          ": " + msg);
+              ", coluna " + (charPositionInLine + 1) +
+              ": " + msg);
     }
   }
 
@@ -104,8 +103,8 @@ public class Main {
 
       throw new FalhaCompilacao(
           "Erro sintatico na linha " + line +
-          ", coluna " + (charPositionInLine + 1) +
-          ": " + msg);
+              ", coluna " + (charPositionInLine + 1) +
+              ": " + msg);
     }
   }
 
