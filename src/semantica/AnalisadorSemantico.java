@@ -1,7 +1,7 @@
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-public class AnalisadorSemantico extends ProjetoIBaseVisitor<Tipo> {
+public class AnalisadorSemantico extends ProjetoIParserBaseVisitor<Tipo> {
 
   private final TabelaSimbolos tabela = new TabelaSimbolos();
 

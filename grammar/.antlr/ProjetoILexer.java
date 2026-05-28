@@ -1,4 +1,4 @@
-// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/grammar/ProjetoI.g4 by ANTLR 4.13.1
+// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/grammar/ProjetoILexer.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -104,7 +104,7 @@ public class ProjetoILexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "ProjetoI.g4"; }
+	public String getGrammarFileName() { return "ProjetoILexer.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

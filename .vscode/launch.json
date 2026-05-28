@@ -6,7 +6,7 @@
       "type": "antlr-debug",
       "request": "launch",
       "input": "exemplos/input.txt",
-      "grammar": "grammar/ProjetoI.g4",
+      "grammar": "grammar/ProjetoIParser.g4",
       "startRule": "prog",
       "printParseTree": true,
       "visualParseTree": true

@@ -1,4 +1,4 @@
-// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/grammar/ProjetoIParser.g4 by ANTLR 4.13.1
+// Generated from c:/Users/vpqmaynard/Desktop/compilados/linguagemSimples/grammar/ProjetoI.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
-public class ProjetoIParser extends Parser {
+public class ProjetoI extends Parser {
 	static { RuntimeMetaData.checkVersion("4.13.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -94,7 +94,7 @@ public class ProjetoIParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "ProjetoIParser.g4"; }
+	public String getGrammarFileName() { return "ProjetoI.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -105,24 +105,24 @@ public class ProjetoIParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public ProjetoIParser(TokenStream input) {
+	public ProjetoI(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ProgContext extends ParserRuleContext {
-		public TerminalNode PROGRAM() { return getToken(ProjetoIParser.PROGRAM, 0); }
-		public TerminalNode ID() { return getToken(ProjetoIParser.ID, 0); }
-		public TerminalNode PVIG() { return getToken(ProjetoIParser.PVIG, 0); }
+		public TerminalNode PROGRAM() { return getToken(ProjetoI.PROGRAM, 0); }
+		public TerminalNode ID() { return getToken(ProjetoI.ID, 0); }
+		public TerminalNode PVIG() { return getToken(ProjetoI.PVIG, 0); }
 		public DeclsContext decls() {
 			return getRuleContext(DeclsContext.class,0);
 		}
 		public CmdCompContext cmdComp() {
 			return getRuleContext(CmdCompContext.class,0);
 		}
-		public TerminalNode PONTO() { return getToken(ProjetoIParser.PONTO, 0); }
-		public TerminalNode EOF() { return getToken(ProjetoIParser.EOF, 0); }
+		public TerminalNode PONTO() { return getToken(ProjetoI.PONTO, 0); }
+		public TerminalNode EOF() { return getToken(ProjetoI.EOF, 0); }
 		public ProgContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -164,7 +164,7 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DeclsContext extends ParserRuleContext {
-		public TerminalNode VAR() { return getToken(ProjetoIParser.VAR, 0); }
+		public TerminalNode VAR() { return getToken(ProjetoI.VAR, 0); }
 		public ListDeclContext listDecl() {
 			return getRuleContext(ListDeclContext.class,0);
 		}
@@ -263,11 +263,11 @@ public class ProjetoIParser extends Parser {
 		public ListIdContext listId() {
 			return getRuleContext(ListIdContext.class,0);
 		}
-		public TerminalNode DPONTOS() { return getToken(ProjetoIParser.DPONTOS, 0); }
+		public TerminalNode DPONTOS() { return getToken(ProjetoI.DPONTOS, 0); }
 		public TipContext tip() {
 			return getRuleContext(TipContext.class,0);
 		}
-		public TerminalNode PVIG() { return getToken(ProjetoIParser.PVIG, 0); }
+		public TerminalNode PVIG() { return getToken(ProjetoI.PVIG, 0); }
 		public DeclTipContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -303,13 +303,13 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ListIdContext extends ParserRuleContext {
-		public List<TerminalNode> ID() { return getTokens(ProjetoIParser.ID); }
+		public List<TerminalNode> ID() { return getTokens(ProjetoI.ID); }
 		public TerminalNode ID(int i) {
-			return getToken(ProjetoIParser.ID, i);
+			return getToken(ProjetoI.ID, i);
 		}
-		public List<TerminalNode> VIG() { return getTokens(ProjetoIParser.VIG); }
+		public List<TerminalNode> VIG() { return getTokens(ProjetoI.VIG); }
 		public TerminalNode VIG(int i) {
-			return getToken(ProjetoIParser.VIG, i);
+			return getToken(ProjetoI.VIG, i);
 		}
 		public ListIdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -357,9 +357,9 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TipContext extends ParserRuleContext {
-		public TerminalNode INTEGER() { return getToken(ProjetoIParser.INTEGER, 0); }
-		public TerminalNode BOOLEAN() { return getToken(ProjetoIParser.BOOLEAN, 0); }
-		public TerminalNode STRING() { return getToken(ProjetoIParser.STRING, 0); }
+		public TerminalNode INTEGER() { return getToken(ProjetoI.INTEGER, 0); }
+		public TerminalNode BOOLEAN() { return getToken(ProjetoI.BOOLEAN, 0); }
+		public TerminalNode STRING() { return getToken(ProjetoI.STRING, 0); }
 		public TipContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -398,8 +398,8 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdCompContext extends ParserRuleContext {
-		public TerminalNode BEGIN() { return getToken(ProjetoIParser.BEGIN, 0); }
-		public TerminalNode END() { return getToken(ProjetoIParser.END, 0); }
+		public TerminalNode BEGIN() { return getToken(ProjetoI.BEGIN, 0); }
+		public TerminalNode END() { return getToken(ProjetoI.END, 0); }
 		public ListCmdContext listCmd() {
 			return getRuleContext(ListCmdContext.class,0);
 		}
@@ -445,8 +445,8 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdBaseContext extends ParserRuleContext {
-		public TerminalNode ABCHAVE() { return getToken(ProjetoIParser.ABCHAVE, 0); }
-		public TerminalNode FCHAVE() { return getToken(ProjetoIParser.FCHAVE, 0); }
+		public TerminalNode ABCHAVE() { return getToken(ProjetoI.ABCHAVE, 0); }
+		public TerminalNode FCHAVE() { return getToken(ProjetoI.FCHAVE, 0); }
 		public ListCmdContext listCmd() {
 			return getRuleContext(ListCmdContext.class,0);
 		}
@@ -498,9 +498,9 @@ public class ProjetoIParser extends Parser {
 		public CmdContext cmd(int i) {
 			return getRuleContext(CmdContext.class,i);
 		}
-		public List<TerminalNode> PVIG() { return getTokens(ProjetoIParser.PVIG); }
+		public List<TerminalNode> PVIG() { return getTokens(ProjetoI.PVIG); }
 		public TerminalNode PVIG(int i) {
-			return getToken(ProjetoIParser.PVIG, i);
+			return getToken(ProjetoI.PVIG, i);
 		}
 		public ListCmdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -634,19 +634,19 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdIfContext extends ParserRuleContext {
-		public TerminalNode IF() { return getToken(ProjetoIParser.IF, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
+		public TerminalNode IF() { return getToken(ProjetoI.IF, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public List<CmdBaseContext> cmdBase() {
 			return getRuleContexts(CmdBaseContext.class);
 		}
 		public CmdBaseContext cmdBase(int i) {
 			return getRuleContext(CmdBaseContext.class,i);
 		}
-		public TerminalNode ELSE() { return getToken(ProjetoIParser.ELSE, 0); }
+		public TerminalNode ELSE() { return getToken(ProjetoI.ELSE, 0); }
 		public CmdIfContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -709,12 +709,12 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdWhileContext extends ParserRuleContext {
-		public TerminalNode WHILE() { return getToken(ProjetoIParser.WHILE, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
+		public TerminalNode WHILE() { return getToken(ProjetoI.WHILE, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public CmdBaseContext cmdBase() {
 			return getRuleContext(CmdBaseContext.class,0);
 		}
@@ -755,18 +755,18 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdForContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(ProjetoIParser.FOR, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
-		public TerminalNode ID() { return getToken(ProjetoIParser.ID, 0); }
-		public TerminalNode ATRIB() { return getToken(ProjetoIParser.ATRIB, 0); }
+		public TerminalNode FOR() { return getToken(ProjetoI.FOR, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
+		public TerminalNode ID() { return getToken(ProjetoI.ID, 0); }
+		public TerminalNode ATRIB() { return getToken(ProjetoI.ATRIB, 0); }
 		public List<ExprContext> expr() {
 			return getRuleContexts(ExprContext.class);
 		}
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
-		public TerminalNode TO() { return getToken(ProjetoIParser.TO, 0); }
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode TO() { return getToken(ProjetoI.TO, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public CmdBaseContext cmdBase() {
 			return getRuleContext(CmdBaseContext.class,0);
 		}
@@ -885,12 +885,12 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdReadContext extends ParserRuleContext {
-		public TerminalNode READ() { return getToken(ProjetoIParser.READ, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
+		public TerminalNode READ() { return getToken(ProjetoI.READ, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
 		public ListIdContext listId() {
 			return getRuleContext(ListIdContext.class,0);
 		}
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public CmdReadContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -926,12 +926,12 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdWriteContext extends ParserRuleContext {
-		public TerminalNode WRITE() { return getToken(ProjetoIParser.WRITE, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
+		public TerminalNode WRITE() { return getToken(ProjetoI.WRITE, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
 		public ListWContext listW() {
 			return getRuleContext(ListWContext.class,0);
 		}
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public CmdWriteContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -973,9 +973,9 @@ public class ProjetoIParser extends Parser {
 		public ElemWContext elemW(int i) {
 			return getRuleContext(ElemWContext.class,i);
 		}
-		public List<TerminalNode> VIG() { return getTokens(ProjetoIParser.VIG); }
+		public List<TerminalNode> VIG() { return getTokens(ProjetoI.VIG); }
 		public TerminalNode VIG(int i) {
-			return getToken(ProjetoIParser.VIG, i);
+			return getToken(ProjetoI.VIG, i);
 		}
 		public ListWContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1026,7 +1026,7 @@ public class ProjetoIParser extends Parser {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode CADEIA() { return getToken(ProjetoIParser.CADEIA, 0); }
+		public TerminalNode CADEIA() { return getToken(ProjetoI.CADEIA, 0); }
 		public ElemWContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1078,8 +1078,8 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class CmdAtribContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ProjetoIParser.ID, 0); }
-		public TerminalNode ATRIB() { return getToken(ProjetoIParser.ATRIB, 0); }
+		public TerminalNode ID() { return getToken(ProjetoI.ID, 0); }
+		public TerminalNode ATRIB() { return getToken(ProjetoI.ATRIB, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
@@ -1154,9 +1154,9 @@ public class ProjetoIParser extends Parser {
 		public ExprAndContext exprAnd(int i) {
 			return getRuleContext(ExprAndContext.class,i);
 		}
-		public List<TerminalNode> OR() { return getTokens(ProjetoIParser.OR); }
+		public List<TerminalNode> OR() { return getTokens(ProjetoI.OR); }
 		public TerminalNode OR(int i) {
-			return getToken(ProjetoIParser.OR, i);
+			return getToken(ProjetoI.OR, i);
 		}
 		public ExprOrContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1210,9 +1210,9 @@ public class ProjetoIParser extends Parser {
 		public ExprRelContext exprRel(int i) {
 			return getRuleContext(ExprRelContext.class,i);
 		}
-		public List<TerminalNode> AND() { return getTokens(ProjetoIParser.AND); }
+		public List<TerminalNode> AND() { return getTokens(ProjetoI.AND); }
 		public TerminalNode AND(int i) {
-			return getToken(ProjetoIParser.AND, i);
+			return getToken(ProjetoI.AND, i);
 		}
 		public ExprAndContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1266,10 +1266,10 @@ public class ProjetoIParser extends Parser {
 		public ExprAddContext exprAdd(int i) {
 			return getRuleContext(ExprAddContext.class,i);
 		}
-		public TerminalNode OPREL() { return getToken(ProjetoIParser.OPREL, 0); }
-		public TerminalNode OPMOE() { return getToken(ProjetoIParser.OPMOE, 0); }
-		public TerminalNode OPDIF() { return getToken(ProjetoIParser.OPDIF, 0); }
-		public TerminalNode OPEQ() { return getToken(ProjetoIParser.OPEQ, 0); }
+		public TerminalNode OPREL() { return getToken(ProjetoI.OPREL, 0); }
+		public TerminalNode OPMOE() { return getToken(ProjetoI.OPMOE, 0); }
+		public TerminalNode OPDIF() { return getToken(ProjetoI.OPDIF, 0); }
+		public TerminalNode OPEQ() { return getToken(ProjetoI.OPEQ, 0); }
 		public ExprRelContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1326,9 +1326,9 @@ public class ProjetoIParser extends Parser {
 		public ExprSubContext exprSub(int i) {
 			return getRuleContext(ExprSubContext.class,i);
 		}
-		public List<TerminalNode> OPAD() { return getTokens(ProjetoIParser.OPAD); }
+		public List<TerminalNode> OPAD() { return getTokens(ProjetoI.OPAD); }
 		public TerminalNode OPAD(int i) {
-			return getToken(ProjetoIParser.OPAD, i);
+			return getToken(ProjetoI.OPAD, i);
 		}
 		public ExprAddContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1382,9 +1382,9 @@ public class ProjetoIParser extends Parser {
 		public ExprMulContext exprMul(int i) {
 			return getRuleContext(ExprMulContext.class,i);
 		}
-		public List<TerminalNode> OPSUB() { return getTokens(ProjetoIParser.OPSUB); }
+		public List<TerminalNode> OPSUB() { return getTokens(ProjetoI.OPSUB); }
 		public TerminalNode OPSUB(int i) {
-			return getToken(ProjetoIParser.OPSUB, i);
+			return getToken(ProjetoI.OPSUB, i);
 		}
 		public ExprSubContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1438,9 +1438,9 @@ public class ProjetoIParser extends Parser {
 		public ExprDivContext exprDiv(int i) {
 			return getRuleContext(ExprDivContext.class,i);
 		}
-		public List<TerminalNode> OPMULT() { return getTokens(ProjetoIParser.OPMULT); }
+		public List<TerminalNode> OPMULT() { return getTokens(ProjetoI.OPMULT); }
 		public TerminalNode OPMULT(int i) {
-			return getToken(ProjetoIParser.OPMULT, i);
+			return getToken(ProjetoI.OPMULT, i);
 		}
 		public ExprMulContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1494,9 +1494,9 @@ public class ProjetoIParser extends Parser {
 		public ExprUnaryContext exprUnary(int i) {
 			return getRuleContext(ExprUnaryContext.class,i);
 		}
-		public List<TerminalNode> OPDI() { return getTokens(ProjetoIParser.OPDI); }
+		public List<TerminalNode> OPDI() { return getTokens(ProjetoI.OPDI); }
 		public TerminalNode OPDI(int i) {
-			return getToken(ProjetoIParser.OPDI, i);
+			return getToken(ProjetoI.OPDI, i);
 		}
 		public ExprDivContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1547,9 +1547,9 @@ public class ProjetoIParser extends Parser {
 		public ExprUnaryContext exprUnary() {
 			return getRuleContext(ExprUnaryContext.class,0);
 		}
-		public TerminalNode OPNEG() { return getToken(ProjetoIParser.OPNEG, 0); }
-		public TerminalNode OPAD() { return getToken(ProjetoIParser.OPAD, 0); }
-		public TerminalNode OPSUB() { return getToken(ProjetoIParser.OPSUB, 0); }
+		public TerminalNode OPNEG() { return getToken(ProjetoI.OPNEG, 0); }
+		public TerminalNode OPAD() { return getToken(ProjetoI.OPAD, 0); }
+		public TerminalNode OPSUB() { return getToken(ProjetoI.OPSUB, 0); }
 		public ExprPrimaryContext exprPrimary() {
 			return getRuleContext(ExprPrimaryContext.class,0);
 		}
@@ -1614,15 +1614,15 @@ public class ProjetoIParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExprPrimaryContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(ProjetoIParser.ID, 0); }
-		public TerminalNode CTE() { return getToken(ProjetoIParser.CTE, 0); }
-		public TerminalNode TRUE() { return getToken(ProjetoIParser.TRUE, 0); }
-		public TerminalNode FALSE() { return getToken(ProjetoIParser.FALSE, 0); }
-		public TerminalNode ABPAR() { return getToken(ProjetoIParser.ABPAR, 0); }
+		public TerminalNode ID() { return getToken(ProjetoI.ID, 0); }
+		public TerminalNode CTE() { return getToken(ProjetoI.CTE, 0); }
+		public TerminalNode TRUE() { return getToken(ProjetoI.TRUE, 0); }
+		public TerminalNode FALSE() { return getToken(ProjetoI.FALSE, 0); }
+		public TerminalNode ABPAR() { return getToken(ProjetoI.ABPAR, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode FPAR() { return getToken(ProjetoIParser.FPAR, 0); }
+		public TerminalNode FPAR() { return getToken(ProjetoI.FPAR, 0); }
 		public ExprPrimaryContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
