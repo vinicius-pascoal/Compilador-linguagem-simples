@@ -42,7 +42,6 @@ public class Main {
       System.out.println("Analise sintatica: OK");
       System.out.println("Analise semantica: OK");
 
-      // Gerar código Java a partir da árvore (após análise semântica)
       GeradorCodigo gerador = new GeradorCodigo();
       String codigo = gerador.gerar((ProjetoIParser.ProgContext) tree);
       String className = gerador.getClassName();

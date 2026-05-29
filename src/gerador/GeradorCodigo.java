@@ -12,7 +12,6 @@ public class GeradorCodigo extends ProjetoIParserBaseVisitor<String> {
     sb.setLength(0);
     decls.setLength(0);
     varTypes.clear();
-    // usar o identificador do prog como nome da classe
     if (ctx.ID() != null)
       className = ctx.ID().getText();
 
@@ -21,16 +20,13 @@ public class GeradorCodigo extends ProjetoIParserBaseVisitor<String> {
     sb.append("  public static void main(String[] args) {\n");
     sb.append("    Scanner sc = new Scanner(System.in);\n");
 
-    // collect declarations first
     visit(ctx.decls());
 
-    // emit declarations
     if (decls.length() > 0) {
       sb.append(decls.toString());
       sb.append("\n");
     }
 
-    // emit commands
     visit(ctx.cmdComp());
 
     sb.append("  }\n");
@@ -153,7 +149,6 @@ public class GeradorCodigo extends ProjetoIParserBaseVisitor<String> {
     return "";
   }
 
-  // Expressions: build Java expression strings
   @Override
   public String visitExpr(ProjetoIParser.ExprContext ctx) {
     return visit(ctx.exprOr());
