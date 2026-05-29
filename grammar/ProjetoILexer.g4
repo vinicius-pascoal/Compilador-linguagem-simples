@@ -56,7 +56,10 @@ ERRO_CTE_2_BYTES: DIGITO+;
 
 CADEIA: '"' (~["\r\n])* '"';
 
-ID: LETRA (LETRA | DIGITO)*;
+ID:
+	LETRA (LETRA | DIGITO)* {
+	if (getText().length() > 16) setText(getText().substring(0,16));
+};
 
 COMMENT: '/*' .*? '*/' -> skip;
 
