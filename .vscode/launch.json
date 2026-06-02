@@ -2,6 +2,13 @@
   "version": "2.0.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "testeCompilador",
+      "request": "launch",
+      "mainClass": "testeCompilador",
+      "projectName": "linguagemSimples_ee1a0f1a"
+    },
+    {
       "name": "Debug ProjetoI ANTLR4",
       "type": "antlr-debug",
       "request": "launch",

@@ -61,7 +61,7 @@ ID:
 	if (getText().length() > 16) setText(getText().substring(0,16));
 };
 
-COMMENT: '/*' .*? '*/' -> skip;
+COMMENT: '/*' ( . | '\r' | '\n')*? '*/' -> skip;
 
 WS: [ \t\r\n]+ -> skip;
 
