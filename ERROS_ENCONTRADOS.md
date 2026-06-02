@@ -19,7 +19,7 @@ Este arquivo lista problemas encontrados na análise estática das gramáticas e
   - Problema: faltam fragments para algumas letras (ex.: `C, J, K, Q, X, Z`). Definição por letra é redundante e frágil.
   - Sugestão: remover fragments A..Z e usar `fragment LETRA: [a-zA-Z];` (já existe) ou declarar palavras-chave com classes case-insensitive (`[pP][rR][oO]...`).
 
-- CADEIA: `CADEIA: '"' (~["\r\n])* '"';`
+- CADEIA: `CADEIA: '"' (~["\r\n])* '"';` (regra atualizada no lexer)
   - Problema: não aceita sequências com escape `\"` dentro da string.
   - Sugestão: caso queira suportar escapes, usar: `CADEIA: '"' ( '\\' . | ~["\\\r\n] )* '"' ;`.
 

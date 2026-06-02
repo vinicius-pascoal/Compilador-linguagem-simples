@@ -54,7 +54,7 @@ CTE: NUM_1_32767 | '0';
 
 ERRO_CTE_2_BYTES: DIGITO+;
 
-CADEIA: '"' (~["\r\n])* '"';
+CADEIA: '"' ( '\\' . | ~["\\\r\n])* '"';
 
 ID:
 	LETRA (LETRA | DIGITO)* {
