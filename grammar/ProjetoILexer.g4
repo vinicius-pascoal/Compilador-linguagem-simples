@@ -24,11 +24,11 @@ AND: A N D;
 
 OPREL: '<=' | '>=';
 
-OPMOE: '<' | '>';
-
 OPDIF: '<>';
 
 OPEQ: '==';
+
+OPMOE: '<' | '>';
 
 OPAD: '+';
 
