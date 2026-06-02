@@ -8,9 +8,8 @@ Este arquivo lista problemas encontrados na análise estática das gramáticas e
 
 - COMMENT: `COMMENT: '/*' ( . | '\r' | '\n' )*? '*/' -> skip;` — Status: Resolvido (regra atualizada no lexer).
 
-- CTE: `CTE: '0'+ | '0'* NUM_1_32767;`
-  - Problema: definição confusa/ambígua. Aceita vários zeros e sequências com prefixo zero antes de `NUM_1_32767`. Dificulta distinção entre zeros válidos e inteiros válidos.
-  - Sugestão: simplificar para `CTE: '0' | NUM_1_32767;` e tratar overflow/limite (32767) na fase semântica.
+- CTE: `CTE: NUM_1_32767 | '0';` — Status: Resolvido (regra atualizada no lexer).
+  - Observação: agora `CTE` aceita apenas `0` ou inteiros no intervalo 1..32767. Sequências de dígitos que não se encaixarem serão capturadas por `ERRO_CTE_2_BYTES` e tratadas como erro léxico/sintático.
 
 - ERRO_CTE_2_BYTES: `ERRO_CTE_2_BYTES: DIGITO+;`
   - Problema: esta regra captura qualquer sequência de dígitos e conflita com `CTE`. A intenção (detecta constantes fora do intervalo) não é corretamente garantida pela forma atual.
@@ -34,9 +33,8 @@ Este arquivo lista apenas os problemas relacionados à gramática (lexer) e ao a
 
 - `COMMENT: '/*' ( . | '\r' | '\n' )*? '*/' -> skip;` — Status: Resolvido (regra atualizada no lexer).
 
-- `CTE: '0'+ | '0'* NUM_1_32767;`
-  - Problema: definição ambígua que aceita múltiplos zeros e prefixos com zeros; pode conflitar com outras regras.
-  - Sugestão: simplificar para `CTE: '0' | NUM_1_32767;` e validar limites (<=32767) no analisador semântico.
+- `CTE: NUM_1_32767 | '0';` — Status: Resolvido (regra atualizada no lexer).
+  - Observação: números válidos (1..32767 e `0`) serão tokenizados como `CTE`. Números inválidos (ex.: `40000`, `012`) serão tokenizados como `ERRO_CTE_2_BYTES` e reportados por `Main.validarTokensLexicos`.
 
 - `ERRO_CTE_2_BYTES: DIGITO+;`
   - Problema: captura qualquer sequência de dígitos e conflita com `CTE`; não garante detectar apenas números fora do intervalo.

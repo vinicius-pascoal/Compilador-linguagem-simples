@@ -50,7 +50,7 @@ FPAR: ')';
 ABCHAVE: '{';
 FCHAVE: '}';
 
-CTE: '0'+ | '0'* NUM_1_32767;
+CTE: NUM_1_32767 | '0';
 
 ERRO_CTE_2_BYTES: DIGITO+;
 
