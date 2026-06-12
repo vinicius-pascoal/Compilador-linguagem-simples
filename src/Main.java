@@ -42,13 +42,31 @@ public class Main {
       System.out.println("Analise sintatica: OK");
       System.out.println("Analise semantica: OK");
 
-      GeradorCodigo gerador = new GeradorCodigo();
-      String codigo = gerador.gerar((ProjetoIParser.ProgContext) tree);
-      String className = gerador.getClassName();
-      java.nio.file.Path outPath = java.nio.file.Paths.get("generated", className + ".java");
-      java.nio.file.Files.createDirectories(outPath.getParent());
-      java.nio.file.Files.writeString(outPath, codigo);
-      System.out.println("Codigo Java gerado em: " + outPath.toString());
+      ProjetoIParser.ProgContext programa = (ProjetoIParser.ProgContext) tree;
+      GeradorCodigoIntermediario gerador3AC = new GeradorCodigoIntermediario();
+      CodigoIntermediario codigo3AC = gerador3AC.gerar(programa);
+
+      OtimizadorCodigoIntermediario otimizador = new OtimizadorCodigoIntermediario();
+      CodigoIntermediario codigo3ACOtimizado = otimizador.otimizar(codigo3AC);
+
+      GeradorAssembly geradorAssembly = new GeradorAssembly();
+      String assembly = geradorAssembly.gerar(codigo3ACOtimizado);
+
+      String nomePrograma = programa.ID().getText();
+      java.nio.file.Path pastaSaida = java.nio.file.Paths.get("generated");
+      java.nio.file.Files.createDirectories(pastaSaida);
+
+      java.nio.file.Path caminho3AC = pastaSaida.resolve(nomePrograma + "_3ac.txt");
+      java.nio.file.Path caminho3ACOtimizado = pastaSaida.resolve(nomePrograma + "_3ac_otimizado.txt");
+      java.nio.file.Path caminhoAssembly = pastaSaida.resolve(nomePrograma + ".asm");
+
+      java.nio.file.Files.writeString(caminho3AC, codigo3AC.comoTexto());
+      java.nio.file.Files.writeString(caminho3ACOtimizado, codigo3ACOtimizado.comoTexto());
+      java.nio.file.Files.writeString(caminhoAssembly, assembly);
+
+      System.out.println("Codigo intermediario 3AC gerado em: " + caminho3AC);
+      System.out.println("Codigo intermediario 3AC otimizado gerado em: " + caminho3ACOtimizado);
+      System.out.println("Codigo final Assembly x86 gerado em: " + caminhoAssembly);
 
     } catch (ErroSemantico e) {
       System.err.println(e.getMessage());
