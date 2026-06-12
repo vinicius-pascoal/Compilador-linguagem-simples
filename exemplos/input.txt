@@ -1,63 +1,69 @@
-PROGRAM testeCompilador;
+PROGRAM testeProjetoII;
 
 VAR
-    contador, limite, total, indice, ajuste : INTEGER;
-    ativo, valido, menor, maior, iguais, diferentes, dentroFaixa : BOOLEAN;
-    mensagem : STRING;
+    valor, limite, soma, i, dobro, metade : INTEGER;
+    ativo, passou, parou, maior, menorOuIgual, diferente : BOOLEAN;
 
 BEGIN
-    /* Inicio do programa */
+    /* Teste completo do compilador com 3AC, otimizacao e assembly */
 
-    READ(contador, limite);
+    READ(valor, limite);
 
-    contador = 0;
-    limite = 10;
-    indice = 1;
-    ajuste = +5;
-    total = -10 + contador * 2 / 1;
-
+    soma = 0;
+    i = 1;
     ativo = TRUE;
-    valido = FALSE;
+    passou = FALSE;
+    parou = FALSE;
 
-    menor = contador < limite;
-    maior = limite > contador;
-    iguais = contador == limite;
-    diferentes = contador <> limite;
-    dentroFaixa = contador <= limite AND limite >= contador;
+    dobro = valor * 2;
+    metade = limite / 2;
 
-    valido = ~(contador == limite) AND ativo OR FALSE;
+    maior = dobro > metade;
+    menorOuIgual = valor <= limite;
+    diferente = valor <> limite;
 
-    WRITE("Inicio do teste", contador, limite, total, ativo, valido);
+    WRITE("Valores iniciais");
+    WRITE(valor, limite, dobro, metade);
+    WRITE(maior, menorOuIgual, diferente);
 
-    IF (contador < limite) {
-        WRITE("contador menor que limite", contador)
+    IF (valor < limite) {
+        WRITE("valor menor que limite");
+        passou = TRUE
     }
     ELSE {
-        WRITE("contador maior ou igual ao limite", contador)
+        WRITE("valor maior ou igual ao limite");
+        passou = FALSE
     };
 
-    WHILE (contador < limite) {
-        contador = contador + 1;
-        total = total + contador;
+    WHILE (i <= limite) {
+        soma = soma + i;
 
-        IF (contador >= 5) {
-            WRITE("contador maior ou igual a cinco", contador)
-        }
-        ELSE {
-            WRITE("contador menor que cinco", contador)
-        }
+        IF (soma >= 20) {
+            parou = TRUE;
+            WRITE("soma chegou ou passou de vinte");
+            WRITE(soma)
+        };
+
+        i = i + 1
     };
 
-    FOR (indice = 1 TO 3) {
-        total = total + indice;
-        WRITE("indice do for", indice, total)
+    FOR (i = 1 TO 4) {
+        dobro = i * 2;
+        WRITE("dobro do indice");
+        WRITE(i, dobro)
     };
 
-    IF (total <> 0) {
-        WRITE("total diferente de zero", total);
-        WRITE("teste finalizado com sucesso")
+    ativo = passou AND menorOuIgual OR ~diferente;
+
+    IF (ativo) {
+        WRITE("programa terminou com estado ativo");
+        WRITE(ativo)
     }
     ELSE {
-        WRITE("total igual a zero")
-    }
+        WRITE("programa terminou com estado inativo");
+        WRITE(ativo)
+    };
+
+    WRITE("resultado final");
+    WRITE(soma, passou, parou)
 END.
