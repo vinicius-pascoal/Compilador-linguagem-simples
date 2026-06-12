@@ -97,13 +97,19 @@ public class GeradorCodigoIntermediario extends ProjetoIParserBaseVisitor<Result
   public ResultadoExpressao3AC visitCmdWrite(ProjetoIParser.CmdWriteContext ctx) {
     for (ProjetoIParser.ElemWContext elem : ctx.listW().elemW()) {
       if (elem.CADEIA() != null) {
-        emitir("WRITE " + elem.CADEIA().getText());
+        emitir("WRITE_STRING " + elem.CADEIA().getText());
       } else {
         ResultadoExpressao3AC valor = visit(elem.expr());
-        emitir("WRITE " + valor.getLugar());
+        emitir(instrucaoWrite(valor.getTipo()) + " " + valor.getLugar());
       }
     }
     return null;
+  }
+
+  private String instrucaoWrite(Tipo tipo) {
+    if (tipo == Tipo.BOOLEAN) return "WRITE_BOOLEAN";
+    if (tipo == Tipo.STRING) return "WRITE_STRING";
+    return "WRITE_INTEGER";
   }
 
   @Override

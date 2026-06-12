@@ -54,15 +54,15 @@ generated/testeCompilador.asm
 6. Geração de código final Assembly x86
 ```
 
-## 6. Montar e executar o Assembly NASM x86-64
+## 6. Montar e executar o Assembly NASM x86 32 bits
 
-O arquivo `generated/testeCompilador.asm` é gerado em sintaxe NASM x86-64, compatível com compiladores online baseados em NASM/JDoodle.
+O arquivo `generated/testeCompilador.asm` é gerado em sintaxe NASM x86 32 bits, compatível com ambientes online que montam com `nasm -f elf`, como o modo NASM 32-bit do JDoodle.
 
 No Linux, rode:
 
 ```bash
-nasm -f elf64 generated/testeCompilador.asm -o generated/testeCompilador.o
-ld generated/testeCompilador.o -o generated/testeCompilador
+nasm -f elf generated/testeCompilador.asm -o generated/testeCompilador.o
+ld -m elf_i386 generated/testeCompilador.o -o generated/testeCompilador
 ./generated/testeCompilador
 ```
 
@@ -72,3 +72,37 @@ Como o programa de exemplo usa `READ(contador, limite)`, informe dois valores na
 0
 10
 ```
+
+## Observações sobre o Assembly gerado
+
+O gerador emite Assembly em sintaxe NASM x86 32 bits, com:
+
+```text
+section .data   -> variáveis, temporários, strings e buffers
+section .text   -> instruções executáveis
+```
+
+Os tipos são mapeados assim:
+
+```text
+INTEGER -> dw
+BOOLEAN -> db
+STRING  -> buffer de 256 bytes
+```
+
+Na geração de saída, o 3AC agora diferencia os comandos de escrita por tipo:
+
+```text
+WRITE_INTEGER valor
+WRITE_BOOLEAN valor
+WRITE_STRING valor
+```
+
+Com isso, valores booleanos são impressos como `TRUE` ou `FALSE`, em vez de `1` ou `0`.
+
+A rotina `_read_integer` também foi ajustada para ler caractere por caractere, permitindo múltiplos comandos `READ` em sequência em ambientes online baseados em entrada padrão.
+
+
+## Observação para JDoodle
+
+Se estiver usando JDoodle, selecione Assembly/NASM em modo 32 bits. O erro `impossible combination of address sizes` ocorre quando um código x86-64 é montado em modo 32 bits. Esta versão foi ajustada para usar apenas registradores de 32 bits (`eax`, `ebx`, `ecx`, `edx`, `esi`, `edi`) e chamadas Linux via `int 0x80`.

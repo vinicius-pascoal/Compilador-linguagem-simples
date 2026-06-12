@@ -16,9 +16,9 @@ public class GeradorAssembly {
     coletarLiteraisString();
 
     StringBuilder asm = new StringBuilder();
-    asm.append("; Codigo Assembly NASM x86-64 gerado a partir do 3AC otimizado\n");
+    asm.append("; Codigo Assembly NASM x86 32 bits gerado a partir do 3AC otimizado\n");
     asm.append("; Programa: ").append(codigo.getNomePrograma()).append("\n");
-    asm.append("; Sintaxe compativel com NASM/JDoodle.\n\n");
+    asm.append("; Sintaxe compativel com NASM/JDoodle em modo 32 bits.\n\n");
 
     gerarData(asm);
     gerarText(asm);
@@ -30,17 +30,21 @@ public class GeradorAssembly {
   private void coletarLiteraisString() {
     for (String instrucao : codigo.getInstrucoes()) {
       String linha = instrucao.trim();
-      if (linha.startsWith("WRITE ")) {
-        String valor = linha.substring(6).trim();
-        if (ehLiteralString(valor) && !literaisString.containsKey(valor)) {
-          literaisString.put(valor, "str_" + contadorString++);
-        }
+      String valor = null;
+
+      if (linha.startsWith("WRITE_STRING ")) {
+        valor = linha.substring("WRITE_STRING ".length()).trim();
+      } else if (linha.startsWith("WRITE ")) {
+        valor = linha.substring(6).trim();
+      }
+
+      if (valor != null && ehLiteralString(valor) && !literaisString.containsKey(valor)) {
+        literaisString.put(valor, "str_" + contadorString++);
       }
     }
   }
 
   private void gerarData(StringBuilder asm) {
-    asm.append("default rel\n");
     asm.append("section .data\n");
     asm.append("  newline db 10\n");
     asm.append("  bool_true db \"TRUE\", 0\n");
@@ -83,10 +87,10 @@ public class GeradorAssembly {
       gerarInstrucao(asm, instrucao.trim());
     }
 
-    asm.append("\n  ; Encerramento do programa Linux x86-64\n");
-    asm.append("  mov rax, 60\n");
-    asm.append("  xor rdi, rdi\n");
-    asm.append("  syscall\n\n");
+    asm.append("\n  ; Encerramento do programa Linux x86 32 bits\n");
+    asm.append("  mov eax, 1\n");
+    asm.append("  xor ebx, ebx\n");
+    asm.append("  int 0x80\n\n");
   }
 
   private void gerarInstrucao(StringBuilder asm, String linha) {
@@ -112,8 +116,23 @@ public class GeradorAssembly {
       return;
     }
 
+    if (linha.startsWith("WRITE_INTEGER ")) {
+      gerarWrite(asm, linha.substring("WRITE_INTEGER ".length()).trim(), Tipo.INTEGER);
+      return;
+    }
+
+    if (linha.startsWith("WRITE_BOOLEAN ")) {
+      gerarWrite(asm, linha.substring("WRITE_BOOLEAN ".length()).trim(), Tipo.BOOLEAN);
+      return;
+    }
+
+    if (linha.startsWith("WRITE_STRING ")) {
+      gerarWrite(asm, linha.substring("WRITE_STRING ".length()).trim(), Tipo.STRING);
+      return;
+    }
+
     if (linha.startsWith("WRITE ")) {
-      gerarWrite(asm, linha.substring(6).trim());
+      gerarWrite(asm, linha.substring(6).trim(), Tipo.INVALIDO);
       return;
     }
 
@@ -135,8 +154,8 @@ public class GeradorAssembly {
     String condicao = partes[1];
     String rotulo = partes[3];
 
-    carregarRax(asm, condicao);
-    asm.append("  cmp rax, 0\n");
+    carregarEax(asm, condicao);
+    asm.append("  cmp eax, 0\n");
     asm.append("  je ").append(rotulo).append("\n");
   }
 
@@ -146,34 +165,37 @@ public class GeradorAssembly {
     if (tipo == Tipo.BOOLEAN) {
       asm.append("  call _read_boolean\n");
     } else if (tipo == Tipo.STRING) {
-      asm.append("  lea rdi, [").append(variavel).append("]\n");
+      asm.append("  lea edi, [").append(variavel).append("]\n");
       asm.append("  call _read_string\n");
       return;
     } else {
       asm.append("  call _read_integer\n");
     }
 
-    armazenarRax(asm, variavel);
+    armazenarEax(asm, variavel);
   }
 
-  private void gerarWrite(StringBuilder asm, String valor) {
+  private void gerarWrite(StringBuilder asm, String valor, Tipo tipoEsperado) {
     if (ehLiteralString(valor)) {
       String rotulo = literaisString.get(valor);
-      asm.append("  lea rdi, [").append(rotulo).append("]\n");
+      asm.append("  lea edi, [").append(rotulo).append("]\n");
       asm.append("  call _print_string\n");
       return;
     }
 
-    Tipo tipo = codigo.getTipo(valor);
+    Tipo tipo = tipoEsperado;
+    if (tipo == Tipo.INVALIDO) {
+      tipo = codigo.getTipo(valor);
+    }
 
     if (tipo == Tipo.BOOLEAN) {
-      carregarRax(asm, valor);
+      carregarEax(asm, valor);
       asm.append("  call _print_boolean\n");
     } else if (tipo == Tipo.STRING) {
-      asm.append("  lea rdi, [").append(valor).append("]\n");
+      asm.append("  lea edi, [").append(valor).append("]\n");
       asm.append("  call _print_string\n");
     } else {
-      carregarRax(asm, valor);
+      carregarEax(asm, valor);
       asm.append("  call _print_integer\n");
     }
   }
@@ -190,9 +212,9 @@ public class GeradorAssembly {
     }
 
     if (expressao.startsWith("-") && expressao.length() > 1 && !ehInteiro(expressao)) {
-      carregarRax(asm, expressao.substring(1));
-      asm.append("  neg rax\n");
-      armazenarRax(asm, destino);
+      carregarEax(asm, expressao.substring(1));
+      asm.append("  neg eax\n");
+      armazenarEax(asm, destino);
       return;
     }
 
@@ -210,48 +232,48 @@ public class GeradorAssembly {
   }
 
   private void gerarAtribuicaoSimples(StringBuilder asm, String destino, String origem) {
-    carregarRax(asm, origem);
-    armazenarRax(asm, destino);
+    carregarEax(asm, origem);
+    armazenarEax(asm, destino);
   }
 
   private void gerarOperacaoBinaria(StringBuilder asm, String destino, String esquerda, String operador, String direita) {
     switch (operador) {
       case "+":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  add rax, rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  add eax, ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "-":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  sub rax, rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  sub eax, ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "*":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  imul rax, rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  imul eax, ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "/":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  cqo\n");
-        asm.append("  idiv rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  cdq\n");
+        asm.append("  idiv ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "AND":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  and rax, rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  and eax, ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "OR":
-        carregarRax(asm, esquerda);
-        carregarRbx(asm, direita);
-        asm.append("  or rax, rbx\n");
-        armazenarRax(asm, destino);
+        carregarEax(asm, esquerda);
+        carregarEbx(asm, direita);
+        asm.append("  or eax, ebx\n");
+        armazenarEax(asm, destino);
         break;
       case "<":
       case ">":
@@ -270,9 +292,9 @@ public class GeradorAssembly {
     String rotuloVerdadeiro = novoRotuloInterno("ASM_TRUE");
     String rotuloFim = novoRotuloInterno("ASM_END_CMP");
 
-    carregarRax(asm, esquerda);
-    carregarRbx(asm, direita);
-    asm.append("  cmp rax, rbx\n");
+    carregarEax(asm, esquerda);
+    carregarEbx(asm, direita);
+    asm.append("  cmp eax, ebx\n");
     armazenarImediato(asm, destino, "0");
     asm.append("  ").append(saltoComparacao(operador)).append(" ").append(rotuloVerdadeiro).append("\n");
     asm.append("  jmp ").append(rotuloFim).append("\n");
@@ -285,8 +307,8 @@ public class GeradorAssembly {
     String rotuloVerdadeiro = novoRotuloInterno("ASM_NEG_TRUE");
     String rotuloFim = novoRotuloInterno("ASM_NEG_END");
 
-    carregarRax(asm, operando);
-    asm.append("  cmp rax, 0\n");
+    carregarEax(asm, operando);
+    asm.append("  cmp eax, 0\n");
     armazenarImediato(asm, destino, "0");
     asm.append("  je ").append(rotuloVerdadeiro).append("\n");
     asm.append("  jmp ").append(rotuloFim).append("\n");
@@ -311,35 +333,35 @@ public class GeradorAssembly {
     return prefixo + "_" + contadorRotulosInternos++;
   }
 
-  private void carregarRax(StringBuilder asm, String operando) {
+  private void carregarEax(StringBuilder asm, String operando) {
     if (ehInteiro(operando)) {
-      asm.append("  mov rax, ").append(operando).append("\n");
+      asm.append("  mov eax, ").append(operando).append("\n");
       return;
     }
 
     Tipo tipo = codigo.getTipo(operando);
     if (tipo == Tipo.BOOLEAN && codigo.getVariaveis().containsKey(operando)) {
-      asm.append("  movzx rax, byte [").append(operando).append("]\n");
+      asm.append("  movzx eax, byte [").append(operando).append("]\n");
     } else {
-      asm.append("  movsx rax, word [").append(operando).append("]\n");
+      asm.append("  movsx eax, word [").append(operando).append("]\n");
     }
   }
 
-  private void carregarRbx(StringBuilder asm, String operando) {
+  private void carregarEbx(StringBuilder asm, String operando) {
     if (ehInteiro(operando)) {
-      asm.append("  mov rbx, ").append(operando).append("\n");
+      asm.append("  mov ebx, ").append(operando).append("\n");
       return;
     }
 
     Tipo tipo = codigo.getTipo(operando);
     if (tipo == Tipo.BOOLEAN && codigo.getVariaveis().containsKey(operando)) {
-      asm.append("  movzx rbx, byte [").append(operando).append("]\n");
+      asm.append("  movzx ebx, byte [").append(operando).append("]\n");
     } else {
-      asm.append("  movsx rbx, word [").append(operando).append("]\n");
+      asm.append("  movsx ebx, word [").append(operando).append("]\n");
     }
   }
 
-  private void armazenarRax(StringBuilder asm, String destino) {
+  private void armazenarEax(StringBuilder asm, String destino) {
     Tipo tipo = codigo.getTipo(destino);
     if (tipo == Tipo.BOOLEAN && codigo.getVariaveis().containsKey(destino)) {
       asm.append("  mov byte [").append(destino).append("], al\n");
@@ -359,148 +381,198 @@ public class GeradorAssembly {
 
   private void gerarRotinasRuntime(StringBuilder asm) {
     asm.append("; ================================\n");
-    asm.append("; Rotinas auxiliares Linux x86-64\n");
+    asm.append("; Rotinas auxiliares Linux x86 32 bits\n");
     asm.append("; ================================\n\n");
 
     asm.append("_print_string:\n");
-    asm.append("  push rdi\n");
-    asm.append("  mov rsi, rdi\n");
-    asm.append("  xor rdx, rdx\n");
+    asm.append("  push ebx\n");
+    asm.append("  push ecx\n");
+    asm.append("  push edx\n");
+    asm.append("  push esi\n");
+    asm.append("  mov esi, edi\n");
+    asm.append("  xor edx, edx\n");
     asm.append(".len_string:\n");
-    asm.append("  cmp byte [rsi + rdx], 0\n");
+    asm.append("  cmp byte [esi + edx], 0\n");
     asm.append("  je .write_string\n");
-    asm.append("  inc rdx\n");
+    asm.append("  inc edx\n");
     asm.append("  jmp .len_string\n");
     asm.append(".write_string:\n");
-    asm.append("  mov rax, 1\n");
-    asm.append("  mov rdi, 1\n");
-    asm.append("  syscall\n");
+    asm.append("  mov eax, 4\n");
+    asm.append("  mov ebx, 1\n");
+    asm.append("  mov ecx, esi\n");
+    asm.append("  int 0x80\n");
     asm.append("  call _print_newline\n");
-    asm.append("  pop rdi\n");
+    asm.append("  pop esi\n");
+    asm.append("  pop edx\n");
+    asm.append("  pop ecx\n");
+    asm.append("  pop ebx\n");
     asm.append("  ret\n\n");
 
     asm.append("_print_integer:\n");
-    asm.append("  push rbx\n");
-    asm.append("  push rcx\n");
-    asm.append("  push rdx\n");
-    asm.append("  push rsi\n");
-    asm.append("  lea rsi, [int_buffer + 31]\n");
-    asm.append("  mov byte [rsi], 10\n");
-    asm.append("  mov rcx, 10\n");
-    asm.append("  xor rbx, rbx\n");
-    asm.append("  cmp rax, 0\n");
+    asm.append("  push ebx\n");
+    asm.append("  push ecx\n");
+    asm.append("  push edx\n");
+    asm.append("  push esi\n");
+    asm.append("  lea esi, [int_buffer + 31]\n");
+    asm.append("  mov byte [esi], 10\n");
+    asm.append("  mov ecx, 10\n");
+    asm.append("  xor ebx, ebx\n");
+    asm.append("  cmp eax, 0\n");
     asm.append("  jge .check_zero\n");
-    asm.append("  mov rbx, 1\n");
-    asm.append("  neg rax\n");
+    asm.append("  mov ebx, 1\n");
+    asm.append("  neg eax\n");
     asm.append(".check_zero:\n");
-    asm.append("  cmp rax, 0\n");
+    asm.append("  cmp eax, 0\n");
     asm.append("  jne .convert_loop\n");
-    asm.append("  dec rsi\n");
-    asm.append("  mov byte [rsi], '0'\n");
+    asm.append("  dec esi\n");
+    asm.append("  mov byte [esi], '0'\n");
     asm.append("  jmp .maybe_sign\n");
     asm.append(".convert_loop:\n");
-    asm.append("  xor rdx, rdx\n");
-    asm.append("  div rcx\n");
+    asm.append("  xor edx, edx\n");
+    asm.append("  div ecx\n");
     asm.append("  add dl, '0'\n");
-    asm.append("  dec rsi\n");
-    asm.append("  mov [rsi], dl\n");
-    asm.append("  cmp rax, 0\n");
+    asm.append("  dec esi\n");
+    asm.append("  mov [esi], dl\n");
+    asm.append("  cmp eax, 0\n");
     asm.append("  jne .convert_loop\n");
     asm.append(".maybe_sign:\n");
-    asm.append("  cmp rbx, 0\n");
+    asm.append("  cmp ebx, 0\n");
     asm.append("  je .write_integer\n");
-    asm.append("  dec rsi\n");
-    asm.append("  mov byte [rsi], '-'\n");
+    asm.append("  dec esi\n");
+    asm.append("  mov byte [esi], '-'\n");
     asm.append(".write_integer:\n");
-    asm.append("  lea rdx, [int_buffer + 32]\n");
-    asm.append("  sub rdx, rsi\n");
-    asm.append("  mov rax, 1\n");
-    asm.append("  mov rdi, 1\n");
-    asm.append("  syscall\n");
-    asm.append("  pop rsi\n");
-    asm.append("  pop rdx\n");
-    asm.append("  pop rcx\n");
-    asm.append("  pop rbx\n");
+    asm.append("  lea edx, [int_buffer + 32]\n");
+    asm.append("  sub edx, esi\n");
+    asm.append("  mov eax, 4\n");
+    asm.append("  mov ebx, 1\n");
+    asm.append("  mov ecx, esi\n");
+    asm.append("  int 0x80\n");
+    asm.append("  pop esi\n");
+    asm.append("  pop edx\n");
+    asm.append("  pop ecx\n");
+    asm.append("  pop ebx\n");
     asm.append("  ret\n\n");
 
     asm.append("_print_boolean:\n");
-    asm.append("  cmp rax, 0\n");
+    asm.append("  cmp eax, 0\n");
     asm.append("  je .print_false\n");
-    asm.append("  lea rdi, [bool_true]\n");
+    asm.append("  lea edi, [bool_true]\n");
     asm.append("  call _print_string\n");
     asm.append("  ret\n");
     asm.append(".print_false:\n");
-    asm.append("  lea rdi, [bool_false]\n");
+    asm.append("  lea edi, [bool_false]\n");
     asm.append("  call _print_string\n");
     asm.append("  ret\n\n");
 
     asm.append("_print_newline:\n");
-    asm.append("  mov rax, 1\n");
-    asm.append("  mov rdi, 1\n");
-    asm.append("  lea rsi, [newline]\n");
-    asm.append("  mov rdx, 1\n");
-    asm.append("  syscall\n");
+    asm.append("  push ebx\n");
+    asm.append("  push ecx\n");
+    asm.append("  push edx\n");
+    asm.append("  mov eax, 4\n");
+    asm.append("  mov ebx, 1\n");
+    asm.append("  mov ecx, newline\n");
+    asm.append("  mov edx, 1\n");
+    asm.append("  int 0x80\n");
+    asm.append("  pop edx\n");
+    asm.append("  pop ecx\n");
+    asm.append("  pop ebx\n");
     asm.append("  ret\n\n");
 
     asm.append("_read_integer:\n");
-    asm.append("  mov rax, 0\n");
-    asm.append("  mov rdi, 0\n");
-    asm.append("  lea rsi, [input_buffer]\n");
-    asm.append("  mov rdx, 64\n");
-    asm.append("  syscall\n");
-    asm.append("  lea rsi, [input_buffer]\n");
-    asm.append("  xor rax, rax\n");
-    asm.append("  xor rbx, rbx\n");
+    asm.append("  ; Le um inteiro da entrada padrao caractere por caractere.\n");
+    asm.append("  ; Isso permite multiplos READ sequenciais em compiladores online.\n");
+    asm.append("  push ebx\n");
+    asm.append("  push ecx\n");
+    asm.append("  push edx\n");
+    asm.append("  push esi\n");
+    asm.append("  push edi\n");
+    asm.append("  push ebp\n");
+    asm.append("  xor edi, edi\n");
+    asm.append("  xor ebp, ebp\n");
     asm.append(".skip_spaces:\n");
-    asm.append("  mov dl, [rsi]\n");
-    asm.append("  cmp dl, ' '\n");
-    asm.append("  je .advance_space\n");
-    asm.append("  cmp dl, 10\n");
-    asm.append("  je .advance_space\n");
-    asm.append("  cmp dl, 13\n");
-    asm.append("  je .advance_space\n");
-    asm.append("  jmp .check_sign\n");
-    asm.append(".advance_space:\n");
-    asm.append("  inc rsi\n");
-    asm.append("  jmp .skip_spaces\n");
-    asm.append(".check_sign:\n");
-    asm.append("  cmp byte [rsi], '-'\n");
-    asm.append("  jne .parse_digits\n");
-    asm.append("  mov rbx, 1\n");
-    asm.append("  inc rsi\n");
-    asm.append(".parse_digits:\n");
-    asm.append("  mov dl, [rsi]\n");
-    asm.append("  cmp dl, '0'\n");
+    asm.append("  mov eax, 3\n");
+    asm.append("  xor ebx, ebx\n");
+    asm.append("  mov ecx, input_buffer\n");
+    asm.append("  mov edx, 1\n");
+    asm.append("  int 0x80\n");
+    asm.append("  cmp eax, 1\n");
+    asm.append("  jne .empty_input\n");
+    asm.append("  mov al, [input_buffer]\n");
+    asm.append("  cmp al, ' '\n");
+    asm.append("  je .skip_spaces\n");
+    asm.append("  cmp al, 9\n");
+    asm.append("  je .skip_spaces\n");
+    asm.append("  cmp al, 10\n");
+    asm.append("  je .skip_spaces\n");
+    asm.append("  cmp al, 13\n");
+    asm.append("  je .skip_spaces\n");
+    asm.append("  cmp al, '-'\n");
+    asm.append("  jne .first_digit\n");
+    asm.append("  mov ebp, 1\n");
+    asm.append("  jmp .read_next_digit\n");
+    asm.append(".first_digit:\n");
+    asm.append("  cmp al, '0'\n");
     asm.append("  jb .finish_read\n");
-    asm.append("  cmp dl, '9'\n");
+    asm.append("  cmp al, '9'\n");
     asm.append("  ja .finish_read\n");
-    asm.append("  imul rax, rax, 10\n");
-    asm.append("  movzx rdx, dl\n");
-    asm.append("  sub rdx, '0'\n");
-    asm.append("  add rax, rdx\n");
-    asm.append("  inc rsi\n");
-    asm.append("  jmp .parse_digits\n");
+    asm.append("  movzx esi, al\n");
+    asm.append("  sub esi, '0'\n");
+    asm.append("  mov edi, esi\n");
+    asm.append(".read_next_digit:\n");
+    asm.append("  mov eax, 3\n");
+    asm.append("  xor ebx, ebx\n");
+    asm.append("  mov ecx, input_buffer\n");
+    asm.append("  mov edx, 1\n");
+    asm.append("  int 0x80\n");
+    asm.append("  cmp eax, 1\n");
+    asm.append("  jne .finish_read\n");
+    asm.append("  mov al, [input_buffer]\n");
+    asm.append("  cmp al, '0'\n");
+    asm.append("  jb .finish_read\n");
+    asm.append("  cmp al, '9'\n");
+    asm.append("  ja .finish_read\n");
+    asm.append("  imul edi, edi, 10\n");
+    asm.append("  movzx esi, al\n");
+    asm.append("  sub esi, '0'\n");
+    asm.append("  add edi, esi\n");
+    asm.append("  jmp .read_next_digit\n");
     asm.append(".finish_read:\n");
-    asm.append("  cmp rbx, 0\n");
-    asm.append("  je .read_done\n");
-    asm.append("  neg rax\n");
-    asm.append(".read_done:\n");
+    asm.append("  mov eax, edi\n");
+    asm.append("  cmp ebp, 0\n");
+    asm.append("  je .restore_and_return\n");
+    asm.append("  neg eax\n");
+    asm.append("  jmp .restore_and_return\n");
+    asm.append(".empty_input:\n");
+    asm.append("  xor eax, eax\n");
+    asm.append(".restore_and_return:\n");
+    asm.append("  pop ebp\n");
+    asm.append("  pop edi\n");
+    asm.append("  pop esi\n");
+    asm.append("  pop edx\n");
+    asm.append("  pop ecx\n");
+    asm.append("  pop ebx\n");
     asm.append("  ret\n\n");
 
     asm.append("_read_boolean:\n");
     asm.append("  call _read_integer\n");
-    asm.append("  cmp rax, 0\n");
+    asm.append("  cmp eax, 0\n");
     asm.append("  setne al\n");
-    asm.append("  movzx rax, al\n");
+    asm.append("  movzx eax, al\n");
     asm.append("  ret\n\n");
 
     asm.append("_read_string:\n");
-    asm.append("  ; RDI deve conter o endereco do buffer destino.\n");
-    asm.append("  mov rsi, rdi\n");
-    asm.append("  mov rax, 0\n");
-    asm.append("  mov rdi, 0\n");
-    asm.append("  mov rdx, 255\n");
-    asm.append("  syscall\n");
+    asm.append("  ; EDI deve conter o endereco do buffer destino.\n");
+    asm.append("  push ebx\n");
+    asm.append("  push ecx\n");
+    asm.append("  push edx\n");
+    asm.append("  mov eax, 3\n");
+    asm.append("  xor ebx, ebx\n");
+    asm.append("  mov ecx, edi\n");
+    asm.append("  mov edx, 255\n");
+    asm.append("  int 0x80\n");
+    asm.append("  pop edx\n");
+    asm.append("  pop ecx\n");
+    asm.append("  pop ebx\n");
     asm.append("  ret\n");
   }
 

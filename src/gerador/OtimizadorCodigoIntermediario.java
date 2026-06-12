@@ -52,6 +52,23 @@ public class OtimizadorCodigoIntermediario {
         continue;
       }
 
+      if (linha.startsWith("WRITE_INTEGER ")) {
+        String valor = linha.substring("WRITE_INTEGER ".length()).trim();
+        resultado.add("WRITE_INTEGER " + substituirSeConstante(valor, constantes));
+        continue;
+      }
+
+      if (linha.startsWith("WRITE_BOOLEAN ")) {
+        String valor = linha.substring("WRITE_BOOLEAN ".length()).trim();
+        resultado.add("WRITE_BOOLEAN " + substituirSeConstante(valor, constantes));
+        continue;
+      }
+
+      if (linha.startsWith("WRITE_STRING ")) {
+        resultado.add(linha);
+        continue;
+      }
+
       if (linha.startsWith("WRITE ")) {
         String valor = linha.substring(6).trim();
         resultado.add("WRITE " + substituirSeConstante(valor, constantes));
