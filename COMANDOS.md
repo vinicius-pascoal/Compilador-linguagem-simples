@@ -53,3 +53,22 @@ generated/testeCompilador.asm
 5. Otimização do 3AC
 6. Geração de código final Assembly x86
 ```
+
+## 6. Montar e executar o Assembly NASM x86-64
+
+O arquivo `generated/testeCompilador.asm` é gerado em sintaxe NASM x86-64, compatível com compiladores online baseados em NASM/JDoodle.
+
+No Linux, rode:
+
+```bash
+nasm -f elf64 generated/testeCompilador.asm -o generated/testeCompilador.o
+ld generated/testeCompilador.o -o generated/testeCompilador
+./generated/testeCompilador
+```
+
+Como o programa de exemplo usa `READ(contador, limite)`, informe dois valores na entrada padrão. Exemplo:
+
+```text
+0
+10
+```
